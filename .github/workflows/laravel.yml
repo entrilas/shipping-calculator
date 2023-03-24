@@ -35,6 +35,11 @@ jobs:
           cd project
           composer install
 
+      - name: Copy .env.example to .env
+        run: |
+          cd project
+          cp .env.example .env
+
       - name: Generate Application Key
         run: |
           cd project
