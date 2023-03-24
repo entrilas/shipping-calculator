@@ -11,8 +11,6 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_DATABASE: laravel
-          MYSQL_USER: root
-          MYSQL_PASSWORD: secret
           MYSQL_ROOT_PASSWORD: secret
         ports:
           - 3306:3306
@@ -37,13 +35,20 @@ jobs:
           cd project
           composer install
 
+      - name: Copy .env.example to .env
+        run: |
+          cd project
+          cp .env.example .env
+
       - name: Generate Application Key
         run: |
           cd project
           php artisan key:generate
 
       - name: Run Tests
-        run: project/vendor/bin/phpunit
+        run: |
+          cd project
+          php artisan test
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
