@@ -46,7 +46,9 @@ jobs:
           php artisan key:generate
 
       - name: Run Tests
-        run: project/vendor/bin/phpunit
+        run: |
+          cd project
+          php artisan test
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
