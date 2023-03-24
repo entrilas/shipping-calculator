@@ -1,0 +1,54 @@
+version: "3.7"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/php-fpm/Dockerfile
+    tty: true
+    environment:
+      - DB_DATABASE=pabnaxpress
+      - DB_USERNAME=butterfly-dev
+      - DB_PASSWORD=blackfire
+    volumes:
+      - ./project:/var/www/html
+    networks:
+      - app
+    depends_on:
+      - db
+
+  nginx:
+    tty: true
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      - "8043:443"
+    volumes:
+      - ./project:/var/www/html
+    networks:
+      - app
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: pabnaxpress
+      MYSQL_USER: butterfly-dev
+      MYSQL_PASSWORD: blackfire
+      MYSQL_ROOT_PASSWORD: blackfire
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app
+
+volumes:
+  db-data: ~
+
+networks:
+  app:
+    driver: bridge
