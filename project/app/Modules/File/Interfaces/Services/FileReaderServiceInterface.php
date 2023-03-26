@@ -5,5 +5,5 @@ namespace App\Modules\File\Interfaces\Services;
 interface FileReaderServiceInterface
 {
     public function readTransactionsFile(string $filePath): array;
-    public function readProvidersFile(string $filePath): array;
+    public function readCarriersFile(string $filePath): array;
 }
