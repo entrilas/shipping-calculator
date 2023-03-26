@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * TransactionTransformer class is responsible for setting the shipment price of a transaction
