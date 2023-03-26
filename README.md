@@ -160,6 +160,7 @@ Follow these steps in order to run the environment:
   * Build the Docker containers using the following command: `docker-compose up --build`
   * Once the containers have been built, enter the Docker container by running the following command: `docker exec -it shipping-calculator-backend-1 bash`
   * Once inside the container, copy the .env.example file to .env using the following command: `cp .env.example .env`
+  * Install composer packages: `composer install`
   * Generate a new key for the application by running the following command: `php artisan key:generate`
 
 **Usage**
