@@ -120,6 +120,10 @@ project
 │   └── Modules
 │       └── Output
 │           └── Interfaces
+├── storage
+│   └── app
+│       ├── input.txt
+│       └── providers.txt
 └── tests
     └── Unit
         ├── Modules
@@ -132,6 +136,7 @@ project
         │   └── Output
         └── Modules
             └── Output
+
 
 ```
 
