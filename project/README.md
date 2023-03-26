@@ -98,42 +98,41 @@ Main Project Architecture
 This is the main logic architecture of the application where you will find most of the logic implemented.
 
 ```
-project/
-├── app/
-│   ├── Modules/
-│   │   ├── Discount/
-│   │   │   ├── Interfaces/
-│   │   │   │   ├── Providers/
-│   │   │   │   ├── Rules/
-│   │   │   │   ├── Services/
-│   │   │   │   └── Transformer/
-│   │   │   ├── Providers/
-│   │   │   ├── Rules/
-│   │   │   ├── Services/
-│   │   │   └── Transformer/
-│   │   ├── File/
-│   │   │   ├── Interfaces/
-│   │   │   │   ├── Processors/
-│   │   │   │   └── Services/
-│   │   │   ├── Processors/
-│   │   │   └── Services/
-│   │   └── Output/
-│   │       └── Interfaces/
-│   ├── Providers/
-│   └── Console/
-│       └── Commands/
-├── tests/
-│   └── Unit/
-│       ├── Modules/
-│       │   ├── Discount/
-│       │   │   ├── Providers/
-│       │   │   ├── Rules/
-│       │   │   └── Services/
-│       │   └── File/
-│       │       ├── Processors/
-│       │       └── Services/
-│       └── ...
-└── ...
+project
+├── app
+│   ├── Modules
+│   │   ├── Discount
+│   │   │   ├── Interfaces
+│   │   │   │   ├── Providers
+│   │   │   │   ├── Rules
+│   │   │   │   ├── Services
+│   │   │   │   └── Transformer
+│   │   │   ├── Providers
+│   │   │   ├── Rules
+│   │   │   ├── Services
+│   │   │   └── Transformer
+│   │   └── File
+│   │       ├── Interfaces
+│   │       │   ├── Processors
+│   │       │   └── Services
+│   │       ├── Processors
+│   │       └── Services
+│   └── Modules
+│       └── Output
+│           └── Interfaces
+└── tests
+    └── Unit
+        ├── Modules
+        │   ├── Discount
+        │   │   ├── Providers
+        │   │   └── Rules
+        │   ├── File
+        │   │   ├── Processors
+        │   │   └── Services
+        │   └── Output
+        └── Modules
+            └── Output
+
 ```
 
 About
