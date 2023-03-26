@@ -13,7 +13,7 @@ use App\Modules\File\Interfaces\Services\FileReaderServiceInterface;
 class CarrierProvider implements CarrierProviderInterface
 {
     private const SMALL_PACKAGE_SIZE = 'S';
-    private const PROVIDERS_PATH = '/var/www/html/storage/app/providers.txt';
+    private const PROVIDERS_PATH = __DIR__ . '/../../../../storage/app/providers.txt';
 
     private array $carriers;
 

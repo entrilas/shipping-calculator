@@ -12,7 +12,7 @@ use App\Modules\File\Interfaces\Services\FileReaderServiceInterface;
 
 class TransactionProvider implements TransactionProviderInterface
 {
-    private const TRANSACTIONS_PATH = '/var/www/html/storage/app/input.txt';
+    private const TRANSACTIONS_PATH = __DIR__ . '/../../../../storage/app/input.txt';
 
     private array $transactions;
 
