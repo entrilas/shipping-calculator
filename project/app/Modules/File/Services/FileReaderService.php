@@ -1,5 +1,11 @@
 <?php declare(strict_types=1);
 
+/**
+ * The FileReaderService class is responsible for reading files and returning their contents in the form of an array.
+ * This class implements FileReaderServiceInterface and depends on FileReaderInterface for file reading. In this scenario
+ * two FileReaders will get built with the Processors accordingly (CarrierProcessor, TransactionProcessor)
+ */
+
 namespace App\Modules\File\Services;
 
 use App\Modules\File\Interfaces\FileReaderInterface;
@@ -18,7 +24,7 @@ class FileReaderService implements FileReaderServiceInterface
         return $this->transactionFileReader->readFile($filePath);
     }
 
-    public function readProvidersFile(string $filePath): array
+    public function readCarriersFile(string $filePath): array
     {
         return $this->providerFileReader->readFile($filePath);
     }
