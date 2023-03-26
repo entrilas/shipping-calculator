@@ -93,28 +93,39 @@ Your program should output transactions and append reduced shipment price and a 
 2015-03-01 S MR 1.50 0.50
 ```
 
-Project Setup
+About
 ----------------------------
-**Requirements
+**Information**
 
-Follow these steps in order to run the environment:
+  * Project is done without any external libraries except for testing (PHPUnit) and building the application (Docker).
+  * Application is done on PHP language (Laravel framework).
+  * There is a comments included in some of the classes about the coding decisions.
+  * Application's logic is covered with Unit tests.
+
+Project setup
+----------------------------
+**Requirements**
+
   * Docker must be installed in your machine.
   * Docker Compose is also needed.
 
-**Installation
+**Installation**
 
 Follow these steps in order to run the environment:
   * Clone the repository to your local machine.
   * Navigate to the root directory of the application.
-  * Build the Docker containers using the following command: docker-compose --build
-  * Once the containers have been built, enter the Docker container by running the following command: docker exec -it shipping-calculator-backend-1 bash
-  * Once inside the container, copy the .env.example file to .env using the following command: cp .env.example .env
-  * Generate a new key for the application by running the following command: php artisan key:generate
+  * Build the Docker containers using the following command: `docker-compose --build`
+  * Once the containers have been built, enter the Docker container by running the following command: `docker exec -it shipping-calculator-backend-1 bash`
+  * Once inside the container, copy the .env.example file to .env using the following command: `cp .env.example .env`
+  * Generate a new key for the application by running the following command: `php artisan key:generate`
 
-**Usage
-  * Enter the Docker container by running the following command: docker exec -it shipping-calculator-backend-1 bash
-  * To run the application, enter this command: php artisan app:discount
-  * To run the tests for the application, enter this command: php artisan test
+**Usage**
 
-**EXTRA
+  * To run the application, enter this command: `php artisan app:discount`
+  * To run the tests for the application, enter this command: `php artisan test`
+
+NOTE: You must be inside the Docker container to run the application (You can enter container by running command: `docker exec -it shipping-calculator-backend-1 bash`)
+
+**EXTRA**
+
   * There is a CI Pipeline setup in the repository in order to run tests before every merge request.
