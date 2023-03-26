@@ -1,8 +1,5 @@
-# Backend Homework Assignment
+# Shipping Calculator Task
 
-Code Philosophy
-----------------------------
-At Vinted, we strive to write clean and simple code, covered with unit tests, and easy to maintain. We also put a high value on consistency and following [language code style](https://github.com/bbatsov/ruby-style-guide). We expect to see the same values conveyed in the problem solution. However, please note that the provided style guide is for Ruby. If the code is written in other language, we expect it to follow the style conventions of the chosen language.
 
 Requirements
 ----------------------------
@@ -18,8 +15,6 @@ Requirements
 
 Problem
 ----------------------------
-Here, at Vinted, our members call themselves 'Vinties' and shopping at Vinted even has its own term - 'to vint'. And our member does vint a lot. Naturally, when something is purchased, it has to be shipped and Vinted provides various shipping options to its members across the globe. However, let's focus on France. In France, it is allowed to ship via either 'Mondial Relay' (MR in short) or 'La Poste' (LP). While 'La Poste' provides usual courier delivery services, 'Mondial Relay' allows you to drop and pick up a shipment at a so-called drop-off point, thus being less convenient, but cheaper for larger packages.
-
 Each item, depending on its size gets an appropriate package size assigned to it:
 
   * S - Small, a popular option to ship jewelry
@@ -98,12 +93,44 @@ Your program should output transactions and append reduced shipment price and a 
 2015-03-01 S MR 1.50 0.50
 ```
 
-Evaluation Criteria
+**Project Setup
 ----------------------------
-* Your solution will be evaluated based on how well all requirements are implemented.
+* The program is covered with Docker.
+Requirements to run
+*Docker
+*Docker Compose
 
----
-### Important
-*Vinted, UAB collects, uses and stores your provided information to assess your suitability to enter into employment contract and suggest a job offer for you (we have the intention to enter into a contract with you (Art. 6 (1) (b) of GDPR). For more information on how Vinted, UAB uses your data and your rights, please see Vinted Job Applicant Privacy Policy available here: https://www.vinted.com/jobs/policy*
+**Installation
 
-*By submitting the response to the given task, you hereby consent that Vinted, UAB shall have the right to reproduce and use the response that you submit for the purpose of its recruitment processes, which will be anonymised after your recruitment process.*
+To install and run the application, follow these steps:
+*Clone the repository to your local machine.
+*Navigate to the root directory of the application.
+*Build the Docker containers using the following command:
+
+docker-compose --build
+Once the containers have been built, enter the Docker container by running the following command:
+
+docker exec -it shipping-calculator-backend-1 bash
+
+Once inside the container, copy the .env.example file to .env using the following command:
+
+*cp .env.example .env
+Generate a new key for the application by running the following command:
+
+*php artisan key:generate
+You can now run the application using the following command:
+
+php artisan app:discount
+This will calculate the shipping costs based on the input parameters.
+
+Running Tests
+To run the tests for the application, follow these steps:
+
+php artisan test
+
+This will run all the tests for the application and output the results.
+
+*NOTE: For both running the code and running the tests, you must be inside the Docker container.
+
+**EXTRA
+* There is a CI Pipeline setup in the repository in order to run tests before every merge request.
