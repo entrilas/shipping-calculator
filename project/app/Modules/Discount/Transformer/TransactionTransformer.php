@@ -13,7 +13,7 @@ use App\Modules\Discount\Interfaces\Transformer\TransactionTransformerInterface;
 
 class TransactionTransformer implements TransactionTransformerInterface
 {
-    public function setTransactionShipmentPrice(Transaction $transaction, array $providers): Transaction
+    public function transformShipmentPrice(Transaction $transaction, array $providers): Transaction
     {
         $transactionShipmentPrice = $this->getTransactionShipmentPrice($transaction, $providers);
         $transaction->setShippingPrice($transactionShipmentPrice);

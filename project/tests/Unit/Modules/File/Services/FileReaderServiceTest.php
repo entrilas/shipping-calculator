@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Modules\File\Services;
+namespace Tests\Unit\Modules\File\Services;
 
 use App\Modules\File\Interfaces\FileReaderInterface;
 use App\Modules\File\Interfaces\Services\FileReaderServiceInterface;
