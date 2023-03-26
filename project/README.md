@@ -1,40 +1,131 @@
-Backend Homework Assignment
-This is a program that calculates shipment discounts based on specific rules. It takes input data from a file, and outputs the transactions with the reduced shipment price and shipment discount. The program is designed to be flexible, allowing for easy modification of existing rules and the addition of new ones.
+# Shipping Calculator Task
 
-Code Philosophy
-This application follows a clean and simple code philosophy that is covered with unit tests and easy to maintain. Consistency and following language code style are also important. While it is recommended to follow the style guide of the chosen language, the code should be consistent in its formatting and follow standard coding practices. The program should be designed to be flexible, allowing for easy modification of existing rules and the addition of new ones.
 
 Requirements
-The requirements for this program are as follows:
+----------------------------
 
-Pick any programming language of your choice.
-The code should follow the code philosophy described above.
-Using additional libraries is prohibited, except for unit tests and build.
-The program should have an easy way to start and run tests.
-The program should have a short documentation of design decisions and assumptions in the code.
-Input data should be loaded from a file (default name 'input.txt' is assumed).
-The solution should output data to the screen (STDOUT) in a specific format.
-The program design should be flexible enough to allow adding new rules and modifying existing ones easily.
+* We recommend picking your favorite programming language. No constraints here. We want you to show us what you're able to do with the tools you already know well.
+* Your solution should match the philosophy described above.
+* Using additional libraries is prohibited. That constraint is not applied for unit tests and build.
+* There should be an easy way to start the solution and tests. (in Ruby case, it could be something like: "rake run input.txt", "rake test")
+* A short documentation of design decisions and assumptions can be provided in the code itself.
+* Make sure your input data is loaded from a file (default name 'input.txt' is assumed)
+* Make sure your solution outputs data to the screen (STDOUT) in a format described below
+* Your design should be flexible enough to allow adding new rules and modifying existing ones easily
+
 Problem
-Our application provides various shipping options to its members in France. Packages are assigned package sizes (S, M, or L) depending on their size, and can be shipped using either 'Mondial Relay' (MR) or 'La Poste' (LP).
+----------------------------
+Each item, depending on its size gets an appropriate package size assigned to it:
 
-The program's task is to create a shipment discount calculation module that implements specific rules:
+  * S - Small, a popular option to ship jewelry
+  * M - Medium - clothes and similar items
+  * L - Large - mostly shoes
 
-All S shipments should always match the lowest S package price among the providers.
-The third L shipment via LP should be free, but only once a calendar month.
-Accumulated discounts cannot exceed 10 € in a calendar month. If there are not enough funds to fully cover a discount this calendar month, it should be covered partially.
-The program takes input data from a file called 'input.txt'. Each line contains a date (in ISO format, without hours), package size code, and carrier code, separated by whitespace. The program outputs transactions with the reduced shipment price and shipment discount. If a line has an unrecognized carrier or size, or if the line format is incorrect, the program appends 'Ignored'.
+Shipping price depends on package size and a provider:
 
-How to Use
-To use this program, follow these steps:
+| Provider     | Package Size | Price  |
+|--------------|--------------|--------|
+| LP           | S            | 1.50 € |
+| LP           | M            | 4.90 € |
+| LP           | L            | 6.90 € |
+| MR           | S            | 2 €    |
+| MR           | M            | 3 €    |
+| MR           | L            | 4 €    |
 
-Clone this repository.
-Open a terminal window and navigate to the project directory.
-Run the program by typing ./program_name input.txt (replace 'program_name' with the name of your program).
-The program will output the transactions with the reduced shipment price and shipment discount.
-To run tests, type ./program_name test.
-Design Decisions
-Design decisions and assumptions are documented in the code itself. The program was designed to be flexible and easily modifiable, so that new rules and modifications can be added with ease.
+Usually, the shipping price is covered by the buyer, but sometimes, in order to promote one or another provider, Vinted covers part of the shipping price.
 
-Conclusion
-This program calculates shipment discounts based on specific rules, and is designed to be flexible and easily modifiable. The program takes input data from a file and outputs transactions with the reduced shipment price and shipment discount. If a line has an unrecognized carrier or size, or if the line format is incorrect, the program appends 'Ignored'.
+**Your task is to create a shipment discount calculation module.**
+
+First, you have to implement such rules:
+  * All S shipments should always match the lowest S package price among the providers.
+  * The third L shipment via LP should be free, but only once a calendar month.
+  * Accumulated discounts cannot exceed 10 € in a calendar month. If there are not enough funds to fully
+  cover a discount this calendar month, it should be covered partially.
+
+**Your design should be flexible enough to allow adding new rules and modifying existing ones easily.**
+
+Member's transactions are listed in a file 'input.txt', each line containing: date (without hours, in ISO format), package size code, and carrier code, separated with whitespace:
+```
+2015-02-01 S MR
+2015-02-02 S MR
+2015-02-03 L LP
+2015-02-05 S LP
+2015-02-06 S MR
+2015-02-06 L LP
+2015-02-07 L MR
+2015-02-08 M MR
+2015-02-09 L LP
+2015-02-10 L LP
+2015-02-10 S MR
+2015-02-10 S MR
+2015-02-11 L LP
+2015-02-12 M MR
+2015-02-13 M LP
+2015-02-15 S MR
+2015-02-17 L LP
+2015-02-17 S MR
+2015-02-24 L LP
+2015-02-29 CUSPS
+2015-03-01 S MR
+```
+Your program should output transactions and append reduced shipment price and a shipment discount (or '-' if there is none). The program should append 'Ignored' word if the line format is wrong or carrier/sizes are unrecognized.
+```
+2015-02-01 S MR 1.50 0.50
+2015-02-02 S MR 1.50 0.50
+2015-02-03 L LP 6.90 -
+2015-02-05 S LP 1.50 -
+2015-02-06 S MR 1.50 0.50
+2015-02-06 L LP 6.90 -
+2015-02-07 L MR 4.00 -
+2015-02-08 M MR 3.00 -
+2015-02-09 L LP 0.00 6.90
+2015-02-10 L LP 6.90 -
+2015-02-10 S MR 1.50 0.50
+2015-02-10 S MR 1.50 0.50
+2015-02-11 L LP 6.90 -
+2015-02-12 M MR 3.00 -
+2015-02-13 M LP 4.90 -
+2015-02-15 S MR 1.50 0.50
+2015-02-17 L LP 6.90 -
+2015-02-17 S MR 1.90 0.10
+2015-02-24 L LP 6.90 -
+2015-02-29 CUSPS Ignored
+2015-03-01 S MR 1.50 0.50
+```
+
+About
+----------------------------
+**Information**
+
+  * Project is done without any external libraries except for testing (PHPUnit) and building the application (Docker).
+  * Application is done on PHP language (Laravel framework).
+  * There is a comments included in some of the classes about the coding decisions.
+  * Application's logic is covered with Unit tests.
+
+Project setup
+----------------------------
+**Requirements**
+
+  * Docker must be installed in your machine.
+  * Docker Compose is also needed.
+
+**Installation**
+
+Follow these steps in order to run the environment:
+  * Clone the repository to your local machine.
+  * Navigate to the root directory of the application.
+  * Build the Docker containers using the following command: `docker-compose --build`
+  * Once the containers have been built, enter the Docker container by running the following command: `docker exec -it shipping-calculator-backend-1 bash`
+  * Once inside the container, copy the .env.example file to .env using the following command: `cp .env.example .env`
+  * Generate a new key for the application by running the following command: `php artisan key:generate`
+
+**Usage**
+
+  * To run the application, enter this command: `php artisan app:discount`
+  * To run the tests for the application, enter this command: `php artisan test`
+
+NOTE: You must be inside the Docker container to run the application (You can enter container by running command: `docker exec -it shipping-calculator-backend-1 bash`)
+
+**EXTRA**
+
+  * There is a CI Pipeline setup in the repository in order to run tests before every merge request.
