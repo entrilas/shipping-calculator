@@ -1,40 +1,109 @@
-Backend Homework Assignment
-This is a program that calculates shipment discounts based on specific rules. It takes input data from a file, and outputs the transactions with the reduced shipment price and shipment discount. The program is designed to be flexible, allowing for easy modification of existing rules and the addition of new ones.
+# Backend Homework Assignment
 
 Code Philosophy
-This application follows a clean and simple code philosophy that is covered with unit tests and easy to maintain. Consistency and following language code style are also important. While it is recommended to follow the style guide of the chosen language, the code should be consistent in its formatting and follow standard coding practices. The program should be designed to be flexible, allowing for easy modification of existing rules and the addition of new ones.
+----------------------------
+At Vinted, we strive to write clean and simple code, covered with unit tests, and easy to maintain. We also put a high value on consistency and following [language code style](https://github.com/bbatsov/ruby-style-guide). We expect to see the same values conveyed in the problem solution. However, please note that the provided style guide is for Ruby. If the code is written in other language, we expect it to follow the style conventions of the chosen language.
 
 Requirements
-The requirements for this program are as follows:
+----------------------------
 
-Pick any programming language of your choice.
-The code should follow the code philosophy described above.
-Using additional libraries is prohibited, except for unit tests and build.
-The program should have an easy way to start and run tests.
-The program should have a short documentation of design decisions and assumptions in the code.
-Input data should be loaded from a file (default name 'input.txt' is assumed).
-The solution should output data to the screen (STDOUT) in a specific format.
-The program design should be flexible enough to allow adding new rules and modifying existing ones easily.
+* We recommend picking your favorite programming language. No constraints here. We want you to show us what you're able to do with the tools you already know well.
+* Your solution should match the philosophy described above.
+* Using additional libraries is prohibited. That constraint is not applied for unit tests and build.
+* There should be an easy way to start the solution and tests. (in Ruby case, it could be something like: "rake run input.txt", "rake test")
+* A short documentation of design decisions and assumptions can be provided in the code itself.
+* Make sure your input data is loaded from a file (default name 'input.txt' is assumed)
+* Make sure your solution outputs data to the screen (STDOUT) in a format described below
+* Your design should be flexible enough to allow adding new rules and modifying existing ones easily
+
 Problem
-Our application provides various shipping options to its members in France. Packages are assigned package sizes (S, M, or L) depending on their size, and can be shipped using either 'Mondial Relay' (MR) or 'La Poste' (LP).
+----------------------------
+Here, at Vinted, our members call themselves 'Vinties' and shopping at Vinted even has its own term - 'to vint'. And our member does vint a lot. Naturally, when something is purchased, it has to be shipped and Vinted provides various shipping options to its members across the globe. However, let's focus on France. In France, it is allowed to ship via either 'Mondial Relay' (MR in short) or 'La Poste' (LP). While 'La Poste' provides usual courier delivery services, 'Mondial Relay' allows you to drop and pick up a shipment at a so-called drop-off point, thus being less convenient, but cheaper for larger packages.
 
-The program's task is to create a shipment discount calculation module that implements specific rules:
+Each item, depending on its size gets an appropriate package size assigned to it:
 
-All S shipments should always match the lowest S package price among the providers.
-The third L shipment via LP should be free, but only once a calendar month.
-Accumulated discounts cannot exceed 10 € in a calendar month. If there are not enough funds to fully cover a discount this calendar month, it should be covered partially.
-The program takes input data from a file called 'input.txt'. Each line contains a date (in ISO format, without hours), package size code, and carrier code, separated by whitespace. The program outputs transactions with the reduced shipment price and shipment discount. If a line has an unrecognized carrier or size, or if the line format is incorrect, the program appends 'Ignored'.
+  * S - Small, a popular option to ship jewelry
+  * M - Medium - clothes and similar items
+  * L - Large - mostly shoes
 
-How to Use
-To use this program, follow these steps:
+Shipping price depends on package size and a provider:
 
-Clone this repository.
-Open a terminal window and navigate to the project directory.
-Run the program by typing ./program_name input.txt (replace 'program_name' with the name of your program).
-The program will output the transactions with the reduced shipment price and shipment discount.
-To run tests, type ./program_name test.
-Design Decisions
-Design decisions and assumptions are documented in the code itself. The program was designed to be flexible and easily modifiable, so that new rules and modifications can be added with ease.
+| Provider     | Package Size | Price  |
+|--------------|--------------|--------|
+| LP           | S            | 1.50 € |
+| LP           | M            | 4.90 € |
+| LP           | L            | 6.90 € |
+| MR           | S            | 2 €    |
+| MR           | M            | 3 €    |
+| MR           | L            | 4 €    |
 
-Conclusion
-This program calculates shipment discounts based on specific rules, and is designed to be flexible and easily modifiable. The program takes input data from a file and outputs transactions with the reduced shipment price and shipment discount. If a line has an unrecognized carrier or size, or if the line format is incorrect, the program appends 'Ignored'.
+Usually, the shipping price is covered by the buyer, but sometimes, in order to promote one or another provider, Vinted covers part of the shipping price.
+
+**Your task is to create a shipment discount calculation module.**
+
+First, you have to implement such rules:
+  * All S shipments should always match the lowest S package price among the providers.
+  * The third L shipment via LP should be free, but only once a calendar month.
+  * Accumulated discounts cannot exceed 10 € in a calendar month. If there are not enough funds to fully
+  cover a discount this calendar month, it should be covered partially.
+
+**Your design should be flexible enough to allow adding new rules and modifying existing ones easily.**
+
+Member's transactions are listed in a file 'input.txt', each line containing: date (without hours, in ISO format), package size code, and carrier code, separated with whitespace:
+```
+2015-02-01 S MR
+2015-02-02 S MR
+2015-02-03 L LP
+2015-02-05 S LP
+2015-02-06 S MR
+2015-02-06 L LP
+2015-02-07 L MR
+2015-02-08 M MR
+2015-02-09 L LP
+2015-02-10 L LP
+2015-02-10 S MR
+2015-02-10 S MR
+2015-02-11 L LP
+2015-02-12 M MR
+2015-02-13 M LP
+2015-02-15 S MR
+2015-02-17 L LP
+2015-02-17 S MR
+2015-02-24 L LP
+2015-02-29 CUSPS
+2015-03-01 S MR
+```
+Your program should output transactions and append reduced shipment price and a shipment discount (or '-' if there is none). The program should append 'Ignored' word if the line format is wrong or carrier/sizes are unrecognized.
+```
+2015-02-01 S MR 1.50 0.50
+2015-02-02 S MR 1.50 0.50
+2015-02-03 L LP 6.90 -
+2015-02-05 S LP 1.50 -
+2015-02-06 S MR 1.50 0.50
+2015-02-06 L LP 6.90 -
+2015-02-07 L MR 4.00 -
+2015-02-08 M MR 3.00 -
+2015-02-09 L LP 0.00 6.90
+2015-02-10 L LP 6.90 -
+2015-02-10 S MR 1.50 0.50
+2015-02-10 S MR 1.50 0.50
+2015-02-11 L LP 6.90 -
+2015-02-12 M MR 3.00 -
+2015-02-13 M LP 4.90 -
+2015-02-15 S MR 1.50 0.50
+2015-02-17 L LP 6.90 -
+2015-02-17 S MR 1.90 0.10
+2015-02-24 L LP 6.90 -
+2015-02-29 CUSPS Ignored
+2015-03-01 S MR 1.50 0.50
+```
+
+Evaluation Criteria
+----------------------------
+* Your solution will be evaluated based on how well all requirements are implemented.
+
+---
+### Important
+*Vinted, UAB collects, uses and stores your provided information to assess your suitability to enter into employment contract and suggest a job offer for you (we have the intention to enter into a contract with you (Art. 6 (1) (b) of GDPR). For more information on how Vinted, UAB uses your data and your rights, please see Vinted Job Applicant Privacy Policy available here: https://www.vinted.com/jobs/policy*
+
+*By submitting the response to the given task, you hereby consent that Vinted, UAB shall have the right to reproduce and use the response that you submit for the purpose of its recruitment processes, which will be anonymised after your recruitment process.*
