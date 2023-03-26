@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Modules\Discount\Rules;
+namespace Tests\Unit\Modules\Discount\Rules;
 
 use App\Models\Transaction;
 use App\Modules\Discount\Rules\ChainedRule;

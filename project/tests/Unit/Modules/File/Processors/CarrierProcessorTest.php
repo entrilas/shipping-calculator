@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Modules\File\Processors;
+namespace Tests\Unit\Modules\File\Processors;
 
 use App\Models\Carrier;
 use App\Modules\File\Processors\CarrierProcessor;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Modules\Discount\Rules;
+namespace Tests\Unit\Modules\Discount\Rules;
 
 use App\Models\Carrier;
 use App\Models\Transaction;

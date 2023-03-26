@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Tests\Unit\Modules\File\Processors;
+
 use App\Models\Transaction;
 use App\Modules\File\Processors\TransactionProcessor;
 use PHPUnit\Framework\TestCase;
