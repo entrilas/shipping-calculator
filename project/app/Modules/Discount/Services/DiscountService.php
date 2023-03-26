@@ -34,7 +34,7 @@ class DiscountService implements DiscountServiceInterface
         $carriers = $this->carrierProvider->getAllCarriers();
 
         foreach ($transactions as &$transaction) {
-            $transaction = $this->transactionTransformer->setTransactionShipmentPrice($transaction, $carriers);
+            $transaction = $this->transactionTransformer->transformShipmentPrice($transaction, $carriers);
             $transaction = $this->chainedRules->applyRule($transaction, $transactions);
         }
 

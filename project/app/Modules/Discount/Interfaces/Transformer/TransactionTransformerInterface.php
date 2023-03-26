@@ -6,5 +6,5 @@ use App\Models\Transaction;
 
 interface TransactionTransformerInterface
 {
-    public function setTransactionShipmentPrice(Transaction $transaction, array $providers): Transaction;
+    public function transformShipmentPrice(Transaction $transaction, array $providers): Transaction;
 }
