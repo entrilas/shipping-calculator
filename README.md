@@ -93,12 +93,13 @@ Your program should output transactions and append reduced shipment price and a 
 2015-03-01 S MR 1.50 0.50
 ```
 
-**Project Setup
+Project Setup
 ----------------------------
 **Requirements**
 Follow these steps in order to run the environment:
   * Docker must be installed in your machine.
   * Docker Compose is also needed.
+
 **Installation**
 
 Follow these steps in order to run the environment:
