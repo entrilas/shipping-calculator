@@ -93,6 +93,49 @@ Your program should output transactions and append reduced shipment price and a 
 2015-03-01 S MR 1.50 0.50
 ```
 
+Main Project Architecture
+----------------------------
+This is the main logic architecture of the application where you will find most of the logic implemented.
+
+```
+project/
+├── app/
+│   ├── Modules/
+│   │   ├── Discount/
+│   │   │   ├── Interfaces/
+│   │   │   │   ├── Providers/
+│   │   │   │   ├── Rules/
+│   │   │   │   ├── Services/
+│   │   │   │   └── Transformer/
+│   │   │   ├── Providers/
+│   │   │   ├── Rules/
+│   │   │   ├── Services/
+│   │   │   └── Transformer/
+│   │   ├── File/
+│   │   │   ├── Interfaces/
+│   │   │   │   ├── Processors/
+│   │   │   │   └── Services/
+│   │   │   ├── Processors/
+│   │   │   └── Services/
+│   │   └── Output/
+│   │       └── Interfaces/
+│   ├── Providers/
+│   └── Console/
+│       └── Commands/
+├── tests/
+│   └── Unit/
+│       ├── Modules/
+│       │   ├── Discount/
+│       │   │   ├── Providers/
+│       │   │   ├── Rules/
+│       │   │   └── Services/
+│       │   └── File/
+│       │       ├── Processors/
+│       │       └── Services/
+│       └── ...
+└── ...
+```
+
 About
 ----------------------------
 **Information**
